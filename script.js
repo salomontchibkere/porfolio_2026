@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const cursor = document.getElementById('customCursor');
 const cursorFollower = document.getElementById('cursorFollower');
 
-if (window.innerWidth > 850) {
+if (window.innerWidth > 850 && window.matchMedia('(pointer: fine)').matches) {
     document.addEventListener('mousemove', (e) => {
         cursor.style.left = e.clientX - 4 + 'px';
         cursor.style.top = e.clientY - 4 + 'px';
@@ -194,24 +194,63 @@ backToTop.addEventListener('click', () => {
     });
 });
 
-// Form Submission
+// Form Submission via Fetch API (Formspree)
 const contactForm = document.getElementById('contactForm');
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    // Add your form submission logic here
-    // For demo, show success message
-    const submitBtn = contactForm.querySelector('.btn-submit');
-    const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<i class="fas fa-check"></i> Message envoyé !';
-    submitBtn.style.background = '#4CAF50';
-    
-    setTimeout(() => {
-        submitBtn.innerHTML = originalText;
-        submitBtn.style.background = '';
-        contactForm.reset();
-    }, 3000);
-});
+const formStatus = document.getElementById('formStatus');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const submitBtn = contactForm.querySelector('#submitBtn');
+        const originalBtnContent = submitBtn.innerHTML;
+        
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+        if (formStatus) {
+            formStatus.className = 'form-status';
+            formStatus.style.display = 'none';
+        }
+
+        const formData = new FormData(contactForm);
+
+        try {
+            const response = await fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                if (formStatus) {
+                    formStatus.textContent = '✨ Message envoyé avec succès ! Merci Salomon vous recontactera très rapidement.';
+                    formStatus.className = 'form-status success';
+                }
+                contactForm.reset();
+            } else {
+                const data = await response.json().catch(() => null);
+                if (formStatus) {
+                    if (data && data.errors) {
+                        formStatus.textContent = '❌ ' + data.errors.map(err => err.message).join(', ');
+                    } else {
+                        formStatus.textContent = '❌ Une erreur s\'est produite. N\'hésitez pas à me contacter via WhatsApp ou Email direct.';
+                    }
+                    formStatus.className = 'form-status error';
+                }
+            }
+        } catch (error) {
+            if (formStatus) {
+                formStatus.textContent = '❌ Problème de connexion. Vous pouvez me joindre directement sur WhatsApp (+237 655 136 824).';
+                formStatus.className = 'form-status error';
+            }
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnContent;
+        }
+    });
+}
 
 // Smooth Scroll for Navigation Links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -255,3 +294,5 @@ skillCards.forEach(card => {
         });
     });
 });
+
+
