@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masterclass - Développement d'Applications Web & Mobiles de A à Z</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&family=Outfit:wght@600;700;800&display=swap');
+
+        @page {
+            size: A4;
+            margin: 22mm 14mm 22mm 14mm;
+        }
+
+        .pdf-header {
+            position: fixed;
+            top: -16mm;
+            left: 0;
+            right: 0;
+            height: 12mm;
+            border-bottom: 1.5px solid #cbd5e1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 8.5pt;
+            color: #475569;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: #ffffff;
+        }
+
+        .pdf-footer {
+            position: fixed;
+            bottom: -16mm;
+            left: 0;
+            right: 0;
+            height: 12mm;
+            border-top: 1.5px solid #cbd5e1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 8.5pt;
+            color: #334155;
+            font-weight: 700;
+            background: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #0f172a;
+            background-color: #ffffff;
+            line-height: 1.65;
+            font-size: 10.5pt;
+        }
+
+        /* Page de Garde */
+        .cover-page {
+            height: 96vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 50px 30px;
+            page-break-after: always;
+            background: linear-gradient(135deg, #0b0f17 0%, #1e293b 100%);
+            color: #ffffff;
+            border-radius: 14px;
+        }
+
+        .cover-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid rgba(59, 130, 246, 0.3);
+            padding-bottom: 25px;
+        }
+
+        .cover-logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 26pt;
+            font-weight: 800;
+            color: #3b82f6;
+            letter-spacing: -1px;
+        }
+
+        .cover-badge {
+            background: rgba(37, 99, 235, 0.2);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 9.5pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cover-body {
+            margin: auto 0;
+        }
+
+        .cover-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 34pt;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 25px;
+            color: #ffffff;
+        }
+
+        .cover-title span {
+            color: #3b82f6;
+            background: linear-gradient(135deg, #60a5fa 0%, #2563eb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cover-subtitle {
+            font-size: 13.5pt;
+            color: #94a3b8;
+            max-width: 720px;
+            margin-bottom: 45px;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        .cover-meta-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .meta-label {
+            font-size: 8.5pt;
+            color: #64748b;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
+
+        .meta-value {
+            font-size: 10.5pt;
+            color: #f8fafc;
+            font-weight: 600;
+        }
+
+        .cover-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 9.5pt;
+            color: #64748b;
+        }
+
+        /* Sommaire */
+        .toc-container {
+            page-break-after: always;
+            padding: 30px 0;
+        }
+
+        .toc-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 22pt;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 30px;
+            border-bottom: 4px solid #2563eb;
+            display: inline-block;
+            padding-bottom: 8px;
+        }
+
+        .toc-module {
+            margin-bottom: 22px;
+        }
+
+        .toc-module-title {
+            font-weight: 700;
+            font-size: 12.5pt;
+            color: #0f172a;
+            background: #f1f5f9;
+            padding: 10px 16px;
+            border-left: 5px solid #2563eb;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 12px;
+        }
+
+        .toc-sublist {
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        .toc-subitem {
+            display: flex;
+            justify-content: space-between;
+            padding: 7px 0;
+            border-bottom: 1px dashed #cbd5e1;
+            font-size: 10pt;
+            color: #334155;
+        }
+
+        /* Structural Styling */
+        .chapter {
+            page-break-before: always;
+            padding-top: 15px;
+        }
+
+        .chapter:first-of-type {
+            page-break-before: avoid;
+        }
+
+        .module-header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #ffffff;
+            padding: 30px 35px;
+            border-radius: 12px;
+            margin-bottom: 35px;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
+        }
+
+        .module-number {
+            color: #60a5fa;
+            font-size: 10pt;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 6px;
+        }
+
+        .module-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 24pt;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 16pt;
+            font-weight: 800;
+            color: #0f172a;
+            margin: 30px 0 16px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 8px;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 22px;
+            background: #2563eb;
+            border-radius: 4px;
+        }
+
+        h3 {
+            font-size: 12.5pt;
+            font-weight: 700;
+            color: #1e293b;
+            margin: 22px 0 12px 0;
+        }
+
+        p {
+            margin-bottom: 14px;
+            color: #334155;
+            text-align: justify;
+            font-size: 10.5pt;
+        }
+
+        ul, ol {
+            margin: 12px 0 18px 25px;
+            color: #334155;
+        }
+
+        li {
+            margin-bottom: 8px;
+            font-size: 10.5pt;
+        }
+
+        /* Callout Boxes */
+        .callout {
+            padding: 18px 22px;
+            border-radius: 10px;
+            margin: 24px 0;
+            font-size: 10pt;
+            line-height: 1.6;
+        }
+
+        .callout-info {
+            background: #eff6ff;
+            border-left: 5px solid #2563eb;
+            color: #1e40af;
+        }
+
+        .callout-warning {
+            background: #fffbeb;
+            border-left: 5px solid #d97706;
+            color: #92400e;
+        }
+
+        .callout-success {
+            background: #f0fdf4;
+            border-left: 5px solid #16a34a;
+            color: #14532d;
+        }
+
+        .callout-title {
+            font-weight: 800;
+            font-size: 10.5pt;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Code Blocks */
+        pre {
+            background: #090d16;
+            color: #f8fafc;
+            padding: 20px 24px;
+            border-radius: 10px;
+            font-family: 'Fira Code', monospace;
+            font-size: 9.5pt;
+            line-height: 1.55;
+            overflow-x: auto;
+            margin: 18px 0 25px 0;
+            border: 1px solid #1e293b;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.5);
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+            background: #f1f5f9;
+            color: #0f172a;
+            padding: 3px 7px;
+            border-radius: 5px;
+            font-size: 9.5pt;
+            font-weight: 500;
+        }
+
+        pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+        }
+
+        .code-kw { color: #93c5fd; font-weight: 700; }
+        .code-str { color: #86efac; }
+        .code-cmt { color: #64748b; font-style: italic; }
+        .code-fn { color: #fde047; font-weight: 600; }
+        .code-num { color: #f472b6; }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 22px 0;
+            font-size: 10pt;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border: 1px solid #cbd5e1;
+        }
+
+        th {
+            background: #f1f5f9;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- RUNNING HEADER & FOOTER FOR PDF PRINTING -->
+    <div class="pdf-header">
+        <span>MANUEL MASTERCLASS — DÉVELOPPEMENT WEB & MOBILE DE A À Z</span>
+        <span>SALOMON TCHIBKERE</span>
+    </div>
+    <div class="pdf-footer">
+        <span>Réalisé par Salomon — Développeur Full-Stack & Consultant IT</span>
+        <span>Édition Officielle 2026</span>
+    </div>
+
+    <!-- PAGE DE GARDE -->
+    <div class="cover-page">
+        <div class="cover-header">
+            <div class="cover-logo">MANUEL MASTERCLASS</div>
+            <div class="cover-badge">ÉDITION EXÉCUTIVE 2026</div>
+        </div>
+        
+        <div class="cover-body">
+            <h1 class="cover-title">DÉVELOPPEMENT WEB & MOBILE <span>DE A À Z</span></h1>
+            <p class="cover-subtitle">Guide complet d'ingénierie logicielle : de la rédaction du Cahier des Charges (CdC) et des Termes de Référence (TDR) jusqu'à la conception d'APIs sécurisées, au développement Web & Mobile, à la containerisation Docker, à la vente commerciale et à la conviction client.</p>
+            
+            <div class="cover-meta-grid">
+                <div class="meta-item">
+                    <span class="meta-label">AUTEUR & RÉALISATION</span>
+                    <span class="meta-value">Salomon Tchibkere</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">EXPERTISE TECHNIQUE</span>
+                    <span class="meta-value">Développeur Full-Stack & Consultant IT</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">LANGAGES & FRAMEWORKS</span>
+                    <span class="meta-value">React, React Native, Node.js, TS</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="cover-footer">
+            <span>Réalisé par Salomon — Développeur Full-Stack & Consultant IT</span>
+            <span>Tous droits réservés © 2026</span>
+        </div>
+    </div>
+
+    <!-- SOMMAIRE DETAILLE -->
+    <div class="toc-container">
+        <h2 class="toc-title">Sommaire Détaillé du Cours</h2>
+        
+        <div class="toc-list">
+            <div class="toc-module">
+                <div class="toc-module-title">Module 0 : Rédaction du Cahier des Charges & des Termes de Référence (TDR) avec le Client</div>
+                <div class="toc-sublist">
+                    <div class="toc-subitem"><span>0.1 Différence entre Cahier des Charges (CdC) et Termes de Référence (TDR)</span> <span>Page 3</span></div>
+                    <div class="toc-subitem"><span>0.2 Structure Type d'un Cahier des Charges Fonctionnel & Technique</span> <span>Page 4</span></div>
+                    <div class="toc-subitem"><span>0.3 Structure Type des Termes de Référence (TDR) & Échéancier Financier</span> <span>Page 5</span></div>
+                    <div class="toc-subitem"><span>0.4 Méthodologie d'Atelier de Cadrage (Discovery Workshop) avec le Client</span> <span>Page 6</span></div>
+                </div>
+            </div>
+
+            <div class="toc-module">
+                <div class="toc-module-title">Module 1 : Analyse des Besoins, UX/UI & Architecture Système</div>
+                <div class="toc-sublist">
+                    <div class="toc-subitem"><span>1.1 Analyse comparative des architectures (PWA vs Natif vs React Native)</span> <span>Page 3</span></div>
+                    <div class="toc-subitem"><span>1.2 Spécification des exigences & Diagrammes UML / MERISE</span> <span>Page 4</span></div>
+                    <div class="toc-subitem"><span>1.3 Structuration de l'Arborescence Projet Professionnelle</span> <span>Page 5</span></div>
+                </div>
+            </div>
+
+            <div class="toc-module">
+                <div class="toc-module-title">Module 2 : Backend API RESTful, Base de Données & Sécurité (Node.js/Express)</div>
+                <div class="toc-sublist">
+                    <div class="toc-subitem"><span>2.1 Modélisation avancée de données avec MongoDB Mongoose & PostgreSQL</span> <span>Page 6</span></div>
+                    <div class="toc-subitem"><span>2.2 Développement complet des Contrôleurs & Gestionnaire d'erreurs</span> <span>Page 8</span></div>
+                    <div class="toc-subitem"><span>2.3 Authentification JWT & Middleware d'autorisation basé sur les Rôles (RBAC)</span> <span>Page 10</span></div>
+                    <div class="toc-subitem"><span>2.4 Validation rigoureuse des entrées utilisateurs avec Zod</span> <span>Page 12</span></div>
+                </div>
+            </div>
+
+            <div class="toc-module">
+                <div class="toc-module-title">Module 3 : Développement Frontend Web Moderne (React.js & TypeScript)</div>
+                <div class="toc-sublist">
+                    <div class="toc-subitem"><span>3.1 Initialisation d'un projet React avec Vite & TypeScript</span> <span>Page 13</span></div>
+                    <div class="toc-subitem"><span>3.2 Service HTTP Axios avec Intercepteurs automatiques (Refraîchissement Token)</span> <span>Page 14</span></div>
+                    <div class="toc-subitem"><span>3.3 Gestion de l'État Global (Context API + Reducer) & Composants protégés</span> <span>Page 16</span></div>
+                </div>
+            </div>
+
+            <div class="toc-module">
+                <div class="toc-module-title">Module 4 : Développement Mobile Cross-Platform (React Native & Expo CLI)</div>
+                <div class="toc-sublist">
+                    <div class="toc-subitem"><span>4.1 Prise en main de React Native : Composants Natifs vs HTML</span> <span>Page 18</span></div>
+                    <div class="toc-subitem"><span>4.2 Configuration du Routeur Mobile (React Navigation 6 : Stack + Tabs)</span> <span>Page 19</span></div>
+                    <div class="toc-subitem"><span>4.3 Stockage Sécurisé des Tokens (Expo SecureStore) & Capteurs Matériels</span> <span>Page 21</span></div>
+                </div>
+            </div>
+
+            <div class="toc-module">
+                <div class="toc-module-title">Module 5 : Communication Temps Réel & Sécurité Avancée</div>
+                <div class="toc-sublist">
+                    <div class="toc-subitem"><span>5.1 Intégration de WebSockets (Socket.io) pour la messagerie instantanée</span> <span>Page 23</span></div>
+                    <div class="toc-subitem"><span>5.2 Sécurisation contre les attaques OWASP Top 10 (Helmet, Rate Limit, Sanitization)</span> <span>Page 25</span></div>
+                </div>
+            </div>
+
+            <div class="toc-module">
+                <div class="toc-module-title">Module 6 : Containerisation Docker, CI/CD & Déploiement Cloud</div>
+                <div class="toc-sublist">
+                    <div class="toc-subitem"><span>6.1 Containerisation de l'API avec Docker & Docker-Compose</span> <span>Page 26</span></div>
+                    <div class="toc-subitem"><span>6.2 Pipeline CI/CD GitHub Actions automatisé</span> <span>Page 28</span></div>
+                    <div class="toc-subitem"><span>6.3 Génération des Builds Mobiles APK (Android) & IPA (iOS) via Expo EAS</span> <span>Page 29</span></div>
+                </div>
+            </div>
+
+            <div class="toc-module">
+                <div class="toc-module-title">Module 7 : Guide de l'Autodidacte : Devenir Développeur Full-Stack Autonome</div>
+                <div class="toc-sublist">
+                    <div class="toc-subitem"><span>7.1 La Feuille de Route d'Apprentissage Autonome (Roadmap Step-by-Step)</span> <span>Page 30</span></div>
+                    <div class="toc-subitem"><span>7.2 Les 5 Erreurs Fatales à Éviter & La Méthode Anti-Tutorial Hell</span> <span>Page 31</span></div>
+                </div>
+            </div>
+
+            <div class="toc-module">
+                <div class="toc-module-title">Module 8 : Kit Commercial & Négociation Client : Gagner des Projets IT</div>
+                <div class="toc-sublist">
+                    <div class="toc-subitem"><span>8.1 Les 7 Questions & Réponses Clés en Entretien Négociation Client</span> <span>Page 32</span></div>
+                    <div class="toc-subitem"><span>8.2 Modèle de Proposition Technique et Financière Prêt à l'Emploi</span> <span>Page 34</span></div>
+                </div>
+            </div>
+
+            <div class="toc-module">
+                <div class="toc-module-title">Module 9 : Les Secrets d'Infiltré pour Percer & Exceller dans le Développement Software</div>
+                <div class="toc-sublist">
+                    <div class="toc-subitem"><span>9.1 Les 5 Secrets Technologiques de l'Ingénierie Logicielle Pro</span> <span>Page 36</span></div>
+                    <div class="toc-subitem"><span>9.2 Le Secret pour Obtenir des Clients & un Emploi sans Expérience</span> <span>Page 38</span></div>
+                    <div class="toc-subitem"><span>9.3 Réussir les Entretiens Techniques & Négociation du Tarif (TJM)</span> <span>Page 40</span></div>
+                </div>
+            </div>
+
+            <div class="toc-module">
+                <div class="toc-module-title">Module 10 : Psychologie de Vente & Conviction Express : Gagner la Confiance du Client en 5 Min</div>
+                <div class="toc-sublist">
+                    <div class="toc-subitem"><span>10.1 La Règle des 3 Premières Minutes (Écoute Active & Inversion de Posture)</span> <span>Page 42</span></div>
+                    <div class="toc-subitem"><span>10.2 Le Script Secret en 4 Étapes pour Supprimer tout Doute Client</span> <span>Page 43</span></div>
+                    <div class="toc-subitem"><span>10.3 Les 5 Signaux Comportementaux qui Déclenchent la Confiance Immédiate</span> <span>Page 44</span></div>
+                </div>
+            </div>
+
+            <div class="toc-module">
+                <div class="toc-module-title">Module 11 : Le Lexique & Glossaire Exhaustif du Développeur Full-Stack (Plus de 60 Termes)</div>
+                <div class="toc-sublist">
+                    <div class="toc-subitem"><span>11.1 Dictionnaire Web, Frontend, UI/UX & React</span> <span>Page 45</span></div>
+                    <div class="toc-subitem"><span>11.2 Dictionnaire Backend, Base de Données & Sécurité (API REST, JWT, RBAC)</span> <span>Page 46</span></div>
+                    <div class="toc-subitem"><span>11.3 Dictionnaire Mobile (React Native, Expo, EAS) & DevOps / Cloud (Docker, CI/CD)</span> <span>Page 47</span></div>
+                    <div class="toc-subitem"><span>11.4 Dictionnaire Business, Gestion de Projet Agile & Freelance (MVP, TJM, TDR)</span> <span>Page 48</span></div>
+                </div>
+            </div>
+
+            <div class="toc-module">
+                <div class="toc-module-title">Module 12 : Intégration des API de Paiement (Mobile Money & Stripe)</div>
+                <div class="toc-sublist">
+                    <div class="toc-subitem"><span>12.1 Flux de Paiement Mobile Money (Orange Money, MTN, Wave) & Webhooks</span> <span>Page 49</span></div>
+                    <div class="toc-subitem"><span>12.2 Intégration Carte Bancaire avec Stripe API</span> <span>Page 50</span></div>
+                </div>
+            </div>
+
+            <div class="toc-module">
+                <div class="toc-module-title">Module 13 : Maintenance, Monitoring & Plan de Reprise d'Activité (PRA)</div>
+                <div class="toc-sublist">
+                    <div class="toc-subitem"><span>13.1 Gestion de Processus avec PM2 & Captures d'Erreurs Sentry</span> <span>Page 51</span></div>
+                    <div class="toc-subitem"><span>13.2 Stratégie de Sauvegarde Automatisée des Bases de Données</span> <span>Page 52</span></div>
+                </div>
+            </div>
+
+            <div class="toc-module">
+                <div class="toc-module-title">Module 14 : Modèles de Contrats Juridiques & Accords de Confidentialité (NDA)</div>
+                <div class="toc-sublist">
+                    <div class="toc-subitem"><span>14.1 Modèle de Contrat de Prestation de Services Informatiques</span> <span>Page 53</span></div>
+                    <div class="toc-subitem"><span>14.2 Accord de Non-Divulgation / Confidentialité (NDA) Prêt à Signer</span> <span>Page 55</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODULE 0 -->
+    <div class="chapter">
+        <div class="module-header">
+            <div class="module-number">Module 0</div>
+            <div class="module-title">Méthodologie de Rédaction du Cahier des Charges & des TDR avec le Client</div>
+        </div>
+
+        <h2>0.1 Différence entre Cahier des Charges (CdC) et Termes de Référence (TDR)</h2>
+        <p>Dans l'ingénierie logicielle et le conseil IT, la réussite d'un projet dépend de la clarté des documents contractuels élaborés avec le client avant tout développement :</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Document</th>
+                    <th>Public Cible & Rôle</th>
+                    <th>Objectif Principal</th>
+                    <th>Contenu Majeur</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Cahier des Charges (CdC)</strong></td>
+                    <td>Équipe technique, Développeurs & Chef de projet</td>
+                    <td>Définir <strong>CE QUE</strong> l'application doit réaliser sur le plan fonctionnel et technique.</td>
+                    <td>User Stories, Maquettes UI/UX, Schéma de base de données, Endpoints API, Sécurité & Performance.</td>
+                </tr>
+                <tr>
+                    <td><strong>Termes de Référence (TDR)</strong></td>
+                    <td>Comité de direction, Bailleurs de fonds, Juristes & Achats</td>
+                    <td>Définir <strong>DANS QUEL CADRE JURIDIQUE ET FINANCIER</strong> la mission sera exécutée.</td>
+                    <td>Objectifs stratégiques, Calendrier d'exécution, Livrables contractuels, Échéancier de paiement & Propriété intellectuelle.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>0.2 Structure Type d'un Cahier des Charges Fonctionnel & Technique</h2>
+        <p>Un Cahier des Charges professionnel rédigé avec le client doit impérativement respecter la structure canonique suivante :</p>
+
+        <ol>
+            <li><strong>Présentation du Projet & Contexte :</strong> Historique de l'entreprise/ONG, problème à résoudre, vision du produit.</li>
+            <li><strong>Spécifications Fonctionnelles Détaillées :</strong>
+                <ul>
+                    <li><em>Rôles Utilisateurs (RBAC) :</em> Administrateur, Formateur, Étudiant, Visiteur anonyme.</li>
+                    <li><em>Matrice des User Stories :</em> Format standard : <code>En tant que [Rôle], je veux [Action] afin de [Bénéfice]</code>.</li>
+                    <li><em>Parcours Utilisateur & Maquettes Wireframe :</em> Description écran par écran (Écran de Connexion, Tableau de Bord, Profil).</li>
+                </ul>
+            </li>
+            <li><strong>Spécifications Techniques :</strong>
+                <ul>
+                    <li>Technologies préconisées (Ex: React + React Native + Node.js).</li>
+                    <li>Hébergement & Disponibilité exigée (SLA > 99.9%).</li>
+                    <li>Temps de réponse maximal par requête (< 500ms).</li>
+                    <li>Conformité réglementaire (Protection des données personnelles / RGPD).</li>
+                </ul>
+            </li>
+            <li><strong>Modalités de Recette & Jalons de Livraison :</strong> Critères stricts permettant au client de valider et signer la réception de chaque version.</li>
+        </ol>
+
+        <h2>0.3 Structure Type des Termes de Référence (TDR) & Échéancier Financier</h2>
+        <p>Les TDR encadrent la relation contractuelle, les responsabilités juridiques et la planification financière :</p>
+
+        <div class="callout callout-info">
+            <div class="callout-title">Échéancier Financier Recommandé par Jalons (Milestones) :</div>
+            <ul>
+                <li><strong>Acompte initial (30%) :</strong> À la signature du contrat et validation du Cahier des Charges & Maquettes Figma.</li>
+                <li><strong>Deuxième Jalon (40%) :</strong> À la livraison et démonstration de la version Beta fonctionnelle (Web & Mobile).</li>
+                <li><strong>Solde Final (30%) :</strong> À la recette finale, mise en production Cloud et transfert du code source complet sur le dépôt GitHub du client.</li>
+            </ul>
+        </div>
+
+        <h2>0.4 Méthodologie d'Atelier de Cadrage (Discovery Workshop)</h2>
+        <p>Pour extraire les vrais besoins du client lors du premier entretien de cadrage, le consultant doit poser <strong>Les 7 Questions Incontournables</strong> :</p>
+
+        <ul>
+            <li><strong>1. Problème Métier :</strong> Quel est le problème N°1 que cette application doit résoudre immédiatement ?</li>
+            <li><strong>2. Profil des Utilisateurs :</strong> Qui utilisera l'application (âge, niveau informatique, environnement de travail) et sur quel matériel (Android, iPhone, PC) ?</li>
+            <li><strong>3. Périmètre MVP (Minimum Viable Product) :</strong> Quelles sont les 3 fonctionnalités indispensables sans lesquelles l'application n'a aucun sens ?</li>
+            <li><strong>4. Intégrations Existantes :</strong> L'application doit-elle communiquer avec des bases de données ou logiciels déjà en place (ERP, CRM, API tierce) ?</li>
+            <li><strong>5. Budget & Contrainte Temporelle :</strong> Quelle est la date limite absolue de livraison et le budget alloué ?</li>
+            <li><strong>6. Indicateurs de Succès (KPIs) :</strong> Comment mesurerez-vous que le projet est un succès dans 6 mois (nombre d'utilisateurs, temps gagné) ?</li>
+            <li><strong>7. Gouvernance & Décision :</strong> Qui est la personne physique unique au sein de votre organisation habilitée à valider et signer les livrables ?</li>
+        </ul>
+    </div>
+
+    <!-- MODULE 1 -->
+    <div class="chapter">
+        <div class="module-header">
+            <div class="module-number">Module 1</div>
+            <div class="module-title">Analyse des Besoins, UX/UI & Architecture Système</div>
+        </div>
+
+        <h2>1.1 Comparatif Approfondi des Architectures Mobile & Web</h2>
+        <p>Le choix d'architecture conditionne l'évolutivité, le coût financier et la maintenabilité d'une application sur le long terme. Voici l'analyse comparative détaillée :</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Critère</th>
+                    <th>Web Application (PWA / React)</th>
+                    <th>Natif (Swift / Kotlin)</th>
+                    <th>Cross-Platform (React Native)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Langages</strong></td>
+                    <td>HTML5, CSS3, JavaScript / TS</td>
+                    <td>Swift (iOS), Kotlin (Android)</td>
+                    <td>JavaScript / TypeScript</td>
+                </tr>
+                <tr>
+                    <td><strong>Réutilisation de code</strong></td>
+                    <td>100% (sur navigateurs)</td>
+                    <td>0% (2 bases de code séparées)</td>
+                    <td>85% à 95% entre iOS et Android</td>
+                </tr>
+                <tr>
+                    <td><strong>Déploiement</strong></td>
+                    <td>Instantanné (Serveur Web)</td>
+                    <td>Validation App Store / Play Store</td>
+                    <td>Validation Store + OTA Update instantané</td>
+                </tr>
+                <tr>
+                    <td><strong>Accès Matériel</strong></td>
+                    <td>Restreint (Caméra basique, GPS)</td>
+                    <td>Accès 100% illimité et natif</td>
+                    <td>Accès complet via Bridges Natifs</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>1.2 Modélisation UML & Arborescence Projet Professionnelle</h2>
+        <p>Une arborescence bien organisée permet d'isoler la couche de données, les routes et la présentation frontend. Voici la structure de dossier recommandée pour un projet d'entreprise :</p>
+
+        <pre><code>mon-projet-fullstack/
+├── backend/                       # API REST Node.js & Express
+│   ├── src/
+│   │   ├── config/                # Connexion Database & Variables env
+│   │   ├── controllers/           # Logique métier (Auth, Projets, Users)
+│   │   ├── middlewares/           # Auth JWT, RBAC, Validation Zod
+│   │   ├── models/                # Schémas Mongoose / ORM Prisma
+│   │   ├── routes/                # Endpoints API (/api/auth, /api/projets)
+│   │   ├── services/              # Services externes (Email, Paiement Stripe)
+│   │   └── app.ts                 # Point d'entrée de l'application
+│   ├── .env.example
+│   ├── Dockerfile
+│   └── package.json
+├── frontend-web/                  # Application Web React + Vite
+│   ├── src/
+│   │   ├── components/            # Boutons, Cards, Modals réutilisables
+│   │   ├── context/               # AuthContext, ThemeContext
+│   │   ├── hooks/                 # Custom Hooks (useAuth, useFetch)
+│   │   ├── pages/                 # Pages (Home, Login, Dashboard)
+│   │   └── services/              # Client Axios interfacé avec l'API
+├── mobile-app/                    # Application Mobile React Native (Expo)
+│   ├── src/
+│   │   ├── navigation/            # Stack & Tab Navigators
+│   │   ├── screens/               # Écrans mobiles (LoginScreen, HomeScreen)
+│   │   └── services/              # Services partagés et SecureStore
+</code></pre>
+    </div>
+
+    <!-- MODULE 2 -->
+    <div class="chapter">
+        <div class="module-header">
+            <div class="module-number">Module 2</div>
+            <div class="module-title">Backend API RESTful, Base de Données & Sécurité</div>
+        </div>
+
+        <h2>2.1 Connexion à la Base de Données & Schéma Utilisateur</h2>
+        <p>Nous utilisons **Mongoose** (MongoDB) avec un schéma d'utilisateur intégrant le hachage sécurisé du mot de passe avec **Bcrypt**.</p>
+
+        <pre><code><span class="code-kw">import</span> mongoose, { Schema, Document } <span class="code-kw">from</span> <span class="code-str">'mongoose'</span>;
+<span class="code-kw">import</span> bcrypt <span class="code-kw">from</span> <span class="code-str">'bcryptjs'</span>;
+
+<span class="code-kw">export interface</span> IUser <span class="code-kw">extends</span> Document {
+    nom: <span class="code-kw">string</span>;
+    email: <span class="code-kw">string</span>;
+    motDePasse: <span class="code-kw">string</span>;
+    role: <span class="code-str">'ETUDIANT'</span> | <span class="code-str">'FORMATEUR'</span> | <span class="code-str">'ADMIN'</span>;
+    comparerMotDePasse(motDePasseSaisi: <span class="code-kw">string</span>): Promise&lt;<span class="code-kw">boolean</span>&gt;;
+}
+
+<span class="code-kw">const</span> UserSchema: Schema = <span class="code-kw">new</span> <span class="code-fn">Schema</span>({
+    nom: { type: String, required: <span class="code-kw">true</span>, trim: <span class="code-kw">true</span> },
+    email: { type: String, required: <span class="code-kw">true</span>, unique: <span class="code-kw">true</span>, lowercase: <span class="code-kw">true</span> },
+    motDePasse: { type: String, required: <span class="code-kw">true</span>, minlength: <span class="code-num">6</span> },
+    role: { type: String, enum: [<span class="code-str">'ETUDIANT'</span>, <span class="code-str">'FORMATEUR'</span>, <span class="code-str">'ADMIN'</span>], default: <span class="code-str">'ETUDIANT'</span> }
+}, { timestamps: <span class="code-kw">true</span> });
+
+<span class="code-cmt">// Hachage automatique avant sauvegarde</span>
+UserSchema.<span class="code-fn">pre</span>&lt;IUser&gt;(<span class="code-str">'save'</span>, <span class="code-kw">async function</span>(next) {
+    <span class="code-kw">if</span> (!<span class="code-kw">this</span>.isModified(<span class="code-str">'motDePasse'</span>)) <span class="code-kw">return</span> <span class="code-fn">next</span>();
+    <span class="code-kw">const</span> salt = <span class="code-kw">await</span> bcrypt.<span class="code-fn">genSalt</span>(<span class="code-num">10</span>);
+    <span class="code-kw">this</span>.motDePasse = <span class="code-kw">await</span> bcrypt.<span class="code-fn">hash</span>(<span class="code-kw">this</span>.motDePasse, salt);
+    <span class="code-fn">next</span>();
+});
+
+<span class="code-cmt">// Méthode d'instance pour vérifier le mot de passe</span>
+UserSchema.methods.comparerMotDePasse = <span class="code-kw">async function</span>(motDePasseSaisi: <span class="code-kw">string</span>): Promise&lt;<span class="code-kw">boolean</span>&gt; {
+    <span class="code-kw">return</span> <span class="code-kw">await</span> bcrypt.<span class="code-fn">compare</span>(motDePasseSaisi, <span class="code-kw">this</span>.motDePasse);
+};
+
+<span class="code-kw">export default</span> mongoose.<span class="code-fn">model</span>&lt;IUser&gt;(<span class="code-str">'User'</span>, UserSchema);</code></pre>
+
+        <h2>2.2 Middleware d'Authentification JWT & Contrôle d'Accès (RBAC)</h2>
+        <p>Le middleware suivant extrait le token JWT envoyé dans l'en-tête HTTP <code>Authorization: Bearer &lt;TOKEN&gt;</code> et vérifie les droits d'accès :</p>
+
+        <pre><code><span class="code-kw">import</span> { Request, Response, NextFunction } <span class="code-kw">from</span> <span class="code-str">'express'</span>;
+<span class="code-kw">import</span> jwt <span class="code-kw">from</span> <span class="code-str">'jsonwebtoken'</span>;
+
+<span class="code-kw">export interface</span> AuthRequest <span class="code-kw">extends</span> Request {
+    user?: { id: <span class="code-kw">string</span>; role: <span class="code-kw">string</span> };
+}
+
+<span class="code-kw">export const</span> authentifierJWT = (req: AuthRequest, res: Response, next: NextFunction) =&gt; {
+    <span class="code-kw">const</span> authHeader = req.headers.authorization;
+    <span class="code-kw">if</span> (!authHeader || !authHeader.<span class="code-fn">startsWith</span>(<span class="code-str">'Bearer '</span>)) {
+        <span class="code-kw">return</span> res.<span class="code-fn">status</span>(<span class="code-num">401</span>).<span class="code-fn">json</span>({ message: <span class="code-str">'Accès non autorisé : Token manquant'</span> });
+    }
+
+    <span class="code-kw">const</span> token = authHeader.<span class="code-fn">split</span>(<span class="code-str">' '</span>)[<span class="code-num">1</span>];
+    <span class="code-kw">try</span> {
+        <span class="code-kw">const</span> decoded = jwt.<span class="code-fn">verify</span>(token, process.env.JWT_SECRET!) <span class="code-kw">as</span> { id: <span class="code-kw">string</span>; role: <span class="code-kw">string</span> };
+        req.user = decoded;
+        <span class="code-fn">next</span>();
+    } <span class="code-kw">catch</span> (error) {
+        <span class="code-kw">return</span> res.<span class="code-fn">status</span>(<span class="code-num">403</span>).<span class="code-fn">json</span>({ message: <span class="code-str">'Token invalide ou expiré'</span> });
+    }
+};
+
+<span class="code-kw">export const</span> exigerRole = (...rolesAutorises: <span class="code-kw">string</span>[]) =&gt; {
+    <span class="code-kw">return</span> (req: AuthRequest, res: Response, next: NextFunction) =&gt; {
+        <span class="code-kw">if</span> (!req.user || !rolesAutorises.<span class="code-fn">includes</span>(req.user.role)) {
+            <span class="code-kw">return</span> res.<span class="code-fn">status</span>(<span class="code-num">403</span>).<span class="code-fn">json</span>({ message: <span class="code-str">'Droits insuffisants pour effectuer cette action'</span> });
+        }
+        <span class="code-fn">next</span>();
+    };
+};</code></pre>
+    </div>
+
+    <!-- MODULE 3 -->
+    <div class="chapter">
+        <div class="module-header">
+            <div class="module-number">Module 3</div>
+            <div class="module-title">Développement Frontend Web (React & TypeScript)</div>
+        </div>
+
+        <h2>3.1 Service Client Axios avec Gestion Automatique des Tokens</h2>
+        <p>Le client Axios intercepte toutes les requêtes pour y injecter le token d'authentification et gère la déconnexion automatique si la session expire :</p>
+
+        <pre><code><span class="code-kw">import</span> axios <span class="code-kw">from</span> <span class="code-str">'axios'</span>;
+
+<span class="code-kw">const</span> apiClient = axios.<span class="code-fn">create</span>({
+    baseURL: <span class="code-str">'https://api.votre-domaine.com/api'</span>,
+    headers: { <span class="code-str">'Content-Type'</span>: <span class="code-str">'application/json'</span> }
+});
+
+<span class="code-cmt">// Intercepteur de requête : Injection du Token</span>
+apiClient.interceptors.request.<span class="code-fn">use</span>((config) =&gt; {
+    <span class="code-kw">const</span> token = localStorage.<span class="code-fn">getItem</span>(<span class="code-str">'token'</span>);
+    <span class="code-kw">if</span> (token) {
+        config.headers.Authorization = <span class="code-str">`Bearer ${token}`</span>;
+    }
+    <span class="code-kw">return</span> config;
+});
+
+<span class="code-cmt">// Intercepteur de réponse : Gestion des erreurs 401 (Session Expirée)</span>
+apiClient.interceptors.response.<span class="code-fn">use</span>(
+    (response) =&gt; response,
+    (error) =&gt; {
+        <span class="code-kw">if</span> (error.response &amp;&amp; error.response.status === <span class="code-num">401</span>) {
+            localStorage.<span class="code-fn">removeItem</span>(<span class="code-str">'token'</span>);
+            window.location.href = <span class="code-str">'/login'</span>;
+        }
+        <span class="code-kw">return</span> Promise.<span class="code-fn">reject</span>(error);
+    }
+);
+
+<span class="code-kw">export default</span> apiClient;</code></pre>
+    </div>
+
+    <!-- MODULE 4 -->
+    <div class="chapter">
+        <div class="module-header">
+            <div class="module-number">Module 4</div>
+            <div class="module-title">Développement Mobile Cross-Platform (React Native / Expo)</div>
+        </div>
+
+        <h2>4.1 Navigation Mobile avec React Navigation 6</h2>
+        <p>Sur Mobile, la navigation s'organise en empilement d'écrans (Stack) et en onglets inférieurs (Bottom Tabs) :</p>
+
+        <pre><code><span class="code-kw">import</span> React <span class="code-kw">from</span> <span class="code-str">'react'</span>;
+<span class="code-kw">import</span> { NavigationContainer } <span class="code-kw">from</span> <span class="code-str">'@react-navigation/native'</span>;
+<span class="code-kw">import</span> { createNativeStackNavigator } <span class="code-kw">from</span> <span class="code-str">'@react-navigation/native-stack'</span>;
+<span class="code-kw">import</span> { createBottomTabNavigator } <span class="code-kw">from</span> <span class="code-str">'@react-navigation/bottom-tabs'</span>;
+
+<span class="code-kw">import</span> LoginScreen <span class="code-kw">from</span> <span class="code-str">'../screens/LoginScreen'</span>;
+<span class="code-kw">import</span> HomeScreen <span class="code-kw">from</span> <span class="code-str">'../screens/HomeScreen'</span>;
+<span class="code-kw">import</span> ProfileScreen <span class="code-kw">from</span> <span class="code-str">'../screens/ProfileScreen'</span>;
+
+<span class="code-kw">const</span> Stack = <span class="code-fn">createNativeStackNavigator</span>();
+<span class="code-kw">const</span> Tab = <span class="code-fn">createBottomTabNavigator</span>();
+
+<span class="code-kw">function</span> <span class="code-fn">MainTabs</span>() {
+    <span class="code-kw">return</span> (
+        &lt;<span class="code-fn">Tab.Navigator</span>&gt;
+            &lt;<span class="code-fn">Tab.Screen</span> name=<span class="code-str">"Accueil"</span> component={HomeScreen} /&gt;
+            &lt;<span class="code-fn">Tab.Screen</span> name=<span class="code-str">"Profil"</span> component={ProfileScreen} /&gt;
+        &lt;/<span class="code-fn">Tab.Navigator</span>&gt;
+    );
+}
+
+<span class="code-kw">export default function</span> <span class="code-fn">AppNavigator</span>() {
+    <span class="code-kw">return</span> (
+        &lt;<span class="code-fn">NavigationContainer</span>&gt;
+            &lt;<span class="code-fn">Stack.Navigator</span> initialRouteName=<span class="code-str">"Login"</span>&gt;
+                &lt;<span class="code-fn">Stack.Screen</span> name=<span class="code-str">"Login"</span> component={LoginScreen} options={{ headerShown: <span class="code-kw">false</span> }} /&gt;
+                &lt;<span class="code-fn">Stack.Screen</span> name=<span class="code-str">"Main"</span> component={MainTabs} options={{ headerShown: <span class="code-kw">false</span> }} /&gt;
+            &lt;/<span class="code-fn">Stack.Navigator</span>&gt;
+        &lt;/<span class="code-fn">NavigationContainer</span>&gt;
+    );
+}</code></pre>
+
+        <h2>4.2 Stockage Sécurisé des Tokens sur Mobile avec Expo SecureStore</h2>
+        <p>Sur iOS et Android, <code>localStorage</code> n'existe pas. On utilise **Expo SecureStore** (utilisant le Keychain iOS et le Keystore Android) :</p>
+
+        <pre><code><span class="code-kw">import</span> * <span class="code-kw">as</span> SecureStore <span class="code-kw">from</span> <span class="code-str">'expo-secure-store'</span>;
+
+<span class="code-cmt">// Sauvegarder le token de manière chiffrée</span>
+<span class="code-kw">export async function</span> <span class="code-fn">sauvegarderToken</span>(token: <span class="code-kw">string</span>) {
+    <span class="code-kw">await</span> SecureStore.<span class="code-fn">setItemAsync</span>(<span class="code-str">'user_token'</span>, token);
+}
+
+<span class="code-cmt">// Récupérer le token chiffré</span>
+<span class="code-kw">export async function</span> <span class="code-fn">recupererToken</span>(): Promise&lt;<span class="code-kw">string</span> | <span class="code-kw">null</span>&gt; {
+    <span class="code-kw">return await</span> SecureStore.<span class="code-fn">getItemAsync</span>(<span class="code-str">'user_token'</span>);
+}</code></pre>
+    </div>
+
+    <!-- MODULE 5 & 6 -->
+    <div class="chapter">
+        <div class="module-header">
+            <div class="module-number">Modules 5 & 6</div>
+            <div class="module-title">Temps Réel (Socket.io), Docker & Déploiement Cloud</div>
+        </div>
+
+        <h2>5.1 Serveur WebSockets Temps Réel avec Socket.io</h2>
+        <p>Permet d'envoyer des notifications et messages instantanés en direct entre le serveur et tous les clients Web et Mobiles connectés :</p>
+
+        <pre><code><span class="code-kw">import</span> { Server } <span class="code-kw">from</span> <span class="code-str">'socket.io'</span>;
+<span class="code-kw">import</span> http <span class="code-kw">from</span> <span class="code-str">'http'</span>;
+<span class="code-kw">import</span> app <span class="code-kw">from</span> <span class="code-str">'./app'</span>;
+
+<span class="code-kw">const</span> server = http.<span class="code-fn">createServer</span>(app);
+<span class="code-kw">const</span> io = <span class="code-kw">new</span> <span class="code-fn">Server</span>(server, {
+    cors: { origin: <span class="code-str">'*'</span> }
+});
+
+io.<span class="code-fn">on</span>(<span class="code-str">'connection'</span>, (socket) =&gt; {
+    console.<span class="code-fn">log</span>(<span class="code-str">`Client connecté : ${socket.id}`</span>);
+
+    socket.<span class="code-fn">on</span>(<span class="code-str">'nouveau_message'</span>, (data) =&gt; {
+        <span class="code-cmt">// Diffusion du message à TOUS les clients connectés</span>
+        io.<span class="code-fn">emit</span>(<span class="code-str">'afficher_message'</span>, data);
+    });
+
+    socket.<span class="code-fn">on</span>(<span class="code-str">'disconnect'</span>, () =&gt; {
+        console.<span class="code-fn">log</span>(<span class="code-str">'Client déconnecté'</span>);
+    });
+});
+
+server.<span class="code-fn">listen</span>(<span class="code-num">5000</span>, () =&gt; console.<span class="code-fn">log</span>(<span class="code-str">'Serveur lancé sur le port 5000'</span>));</code></pre>
+
+        <h2>6.1 Fichier Dockerfile pour Déploiement Cloud</h2>
+        <p>Containerisez votre API Node.js pour garantir qu'elle s'exécute exactement de la même manière sur tous les serveurs cloud :</p>
+
+        <pre><code># Image officielle Node.js légère
+FROM node:18-alpine
+
+# Répertoire de travail
+WORKDIR /app
+
+# Copie des fichiers de dépendances
+COPY package*.json ./
+
+# Installation des dépendances de production
+RUN npm install --production
+
+# Copie du code source
+COPY . .
+
+# Compilation TypeScript
+RUN npm run build
+
+# Port d'écoute
+EXPOSE 5000
+
+# Commande de démarrage
+CMD ["node", "dist/app.js"]</code></pre>
+
+        <h2>6.2 Publication Mobile Android & iOS via Expo EAS Build</h2>
+        <p>Commandes CLI officielles pour générer les fichiers binaires prêts pour le Google Play Store (`.aab`) et l'Apple App Store (`.ipa`) :</p>
+
+        <pre><code># 1. Installation du CLI officiel Expo EAS
+npm install -g eas-cli
+
+# 2. Connexion à votre compte Expo
+eas login
+
+# 3. Configuration du projet mobile
+eas build:configure
+
+# 4. Génération de l'application Android (Fichier APK / AAB)
+eas build --platform android --profile production
+
+# 5. Génération de l'application iOS (Fichier IPA)
+eas build --platform ios --profile production</code></pre>
+
+        <div class="callout callout-success">
+            <div class="callout-title">Félicitations !</div>
+            Vous avez suivi l'intégralité du processus de création d'une solution numérique moderne de A à Z. Vous maîtrisez désormais l'architecture Full-Stack complète, la sécurité, le temps réel et le déploiement multi-plateforme !
+        </div>
+    </div>
+
+    <!-- MODULE 7 -->
+    <div class="chapter">
+        <div class="module-header">
+            <div class="module-number">Module 7</div>
+            <div class="module-title">Guide de l'Autodidacte : Devenir Développeur Full-Stack Autonome</div>
+        </div>
+
+        <h2>7.1 Feuille de Route d'Apprentissage Autonome (Roadmap Step-by-Step)</h2>
+        <p>Devenir développeur Full-Stack sans l'aide d'un tiers exige une discipline rigoureuse et une stratégie en 5 étapes progressives :</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Étape</th>
+                    <th>Compétences Cibles</th>
+                    <th>Projets Pratiques à Construire</th>
+                    <th>Ressources Conseillées</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Étape 1 (Mois 1-2)</strong><br>Bases Web</td>
+                    <td>HTML5 sémantique, CSS3 (Flexbox, Grid, Responsive), JavaScript ES6+ (Promises, Async/Await, Array Methods).</td>
+                    <td>Site portfolio personnel, Page E-commerce statique.</td>
+                    <td>MDN Web Docs, freeCodeCamp, W3Schools.</td>
+                </tr>
+                <tr>
+                    <td><strong>Étape 2 (Mois 3-4)</strong><br>Frontend & TS</td>
+                    <td>React.js, TypeScript, Hooks (useState, useEffect), React Router, Styling (TailwindCSS / CSS Modules).</td>
+                    <td>Application Météo API, Dashboard de Gestion de Tâches (Todo List avancée).</td>
+                    <td>Documentation officielle React, Académie TypeScript.</td>
+                </tr>
+                <tr>
+                    <td><strong>Étape 3 (Mois 5-6)</strong><br>Backend & BD</td>
+                    <td>Node.js, Express.js, MongoDB (Mongoose), PostgreSQL, Authentification JWT, Hashage Bcrypt, API REST.</td>
+                    <td>API REST de Blog avec système d'authentification et d'upload d'images.</td>
+                    <td>Documentations Express & Mongoose.</td>
+                </tr>
+                <tr>
+                    <td><strong>Étape 4 (Mois 7-8)</strong><br>Mobile Cross-Platform</td>
+                    <td>React Native, Expo CLI, React Navigation, Expo SecureStore, Requêtes API sur Mobile.</td>
+                    <td>Application Mobile de Commande de Repas ou de Messagerie Simple.</td>
+                    <td>Documentation officielle Expo / React Native.</td>
+                </tr>
+                <tr>
+                    <td><strong>Étape 5 (Mois 9-12)</strong><br>DevOps & Pro-Level</td>
+                    <td>Git / GitHub Workflows, Docker, Linux Terminal, CI/CD, Déploiement Cloud (Render, Vercel, Railway).</td>
+                    <td>Application SaaS Full-Stack (Web + Mobile + Backend + Base de Données en ligne).</td>
+                    <td>Docker Docs, GitHub Actions Guide.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>7.2 Les 5 Erreurs Fatales à Éviter en Autodidacte</h2>
+        <div class="callout callout-warning">
+            <div class="callout-title">Ne Tombez Pas dans ces Pièges :</div>
+            <ul>
+                <li><strong>1. Le piège du "Tutorial Hell" :</strong> Regarder des centaines d'heures de cours vidéo sans rien coder par soi-même. <em>Solution : Règle du 20/80 (20% de théorie vidéo, 80% de pratique autonome).</em></li>
+                <li><strong>2. Zapper les Fondations JavaScript :</strong> Sauter directement sur React sans comprendre comment fonctionnent les Promises, l'asynchronisme ou la portée des variables.</li>
+                <li><strong>3. Apprendre trop de langages à la fois :</strong> Essayer d'apprendre Python, PHP, Java, Flutter et React en même temps. <em>Masterisez d'abord la stack Full-JavaScript (React + Node.js + React Native).</em></li>
+                <li><strong>4. Ignorer Git et GitHub :</strong> Coder des projets importants sur son ordinateur sans jamais faire de commits ni publier sur GitHub.</li>
+                <li><strong>5. Abandonner face aux bugs :</strong> Se décourager au premier message d'erreur. <em>Apprenez à lire les logs d'erreur de haut en bas et à chercher sur Google / Stack Overflow.</em></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- MODULE 8 -->
+    <div class="chapter">
+        <div class="module-header">
+            <div class="module-number">Module 8</div>
+            <div class="module-title">Kit Commercial & Négociation Client : Gagner des Projets IT</div>
+        </div>
+
+        <h2>8.1 Les 7 Questions & Réponses Clés en Entretien Client pour Décrocher des Contrats</h2>
+        <p>Lors d'un entretien de négociation avec un client potentiel, le développeur ne doit pas parler comme un technicien mais comme un <strong>Partenaire de Croissance Métier</strong>. Voici les réponses types qui rassurent le client et vous font remporter le marché :</p>
+
+        <div class="callout callout-info">
+            <div class="callout-title">Question Client 1 : "Pourquoi devrais-je vous choisir vous plutôt qu'une grosse agence web ?"</div>
+            <p><strong>Réponse Gagnante :</strong> <em>« Avec une grande agence, votre projet sera dilué entre plusieurs stagiaires ou chefs de projets juniors. En travaillant directement avec moi, vous avez un interlocuteur unique, expert et ultra-réactif de A à Z. Je m'investis personnellement dans votre réussite avec des coûts d'infrastructure optimisés et zéro frais de structure inutile. »</em></p>
+        </div>
+
+        <div class="callout callout-info">
+            <div class="callout-title">Question Client 2 : "Votre devis est au-dessus de notre budget. Pouvez-vous faire une baisse de prix ?"</div>
+            <p><strong>Réponse Gagnante :</strong> <em>« Je comprends parfaitement vos contraintes budgétaires. Cependant, réduire le prix sans toucher au périmètre dégraderait la qualité et la sécurité de votre application. Ce que je vous propose, c'est de réduire la portée de la Version 1 (MVP) en ne gardant que les 3 fonctionnalités vitales pour respecter votre budget actuel, puis de développer les options secondaires dans une Phase 2 une fois votre projet rentable. »</em></p>
+        </div>
+
+        <div class="callout callout-info">
+            <div class="callout-title">Question Client 3 : "Combien de temps prendra la livraison de l'application ?"</div>
+            <p><strong>Réponse Gagnante :</strong> <em>« Pour garantir une qualité optimale, nous fonctionnons par livraison par jalons valables toutes les 2 semaines. Vous aurez accès à une version de démonstration dès la fin de la 3ème semaine pour tester en direct et me faire vos retours. La version finale stabilisée sera livrée en [X] semaines conformément à l'échéancier des TDR. »</em></p>
+        </div>
+
+        <div class="callout callout-info">
+            <div class="callout-title">Question Client 4 : "Que se passe-t-il si un bug survient après la livraison et le paiement final ?"</div>
+            <p><strong>Réponse Gagnante :</strong> <em>« Tous mes contrats incluent une <strong>Garantie Corrective Gratuite de 6 mois</strong> post-livraison. Si un dysfonctionnement technique lié au code initial apparaît, je le corrige immédiatement à mes frais. De plus, nous pouvons mettre en place un contrat de maintenance préventive pour les évolutions futures. »</em></p>
+        </div>
+
+        <div class="callout callout-info">
+            <div class="callout-title">Question Client 5 : "À qui appartient le code source une fois le projet achevé ?"</div>
+            <p><strong>Réponse Gagnante :</strong> <em>« Dès le règlement du solde final, la totalité des droits de propriété intellectuelle et l'intégralité du code source vous sont transférés sur votre propre dépôt GitHub d'entreprise. Vous êtes 100% propriétaire de votre solution. »</em></p>
+        </div>
+
+        <h2>8.2 Modèle de Proposition Technique et Financière (Devis Professionnel)</h2>
+        <pre><code>PROPOSITION TECHNIQUE ET FINANCIÈRE
+-----------------------------------------------------------------
+Projet : Développement Application Web & Mobile "Nom Client"
+Prestataire : Tchibkere Salomon (Développeur Full-Stack & Consultant)
+Client : [Nom de l'Entreprise / Organisation Client]
+Date : 30 Août 2026
+
+1. PÉRIMÈTRE DES PRESTATIONS :
+   - Conception UI/UX & Maquettes Figma interactives
+   - API Backend sécurisée (Node.js/Express, JWT, Auth, MongoDB)
+   - Application Web Responsive (React + Vite)
+   - Application Mobile Android & iOS (React Native + Expo)
+   - Déploiement Cloud (Serveur HTTPS, Base de données, Google Play Store)
+
+2. ÉCHÉANCIER DE LIVRAISON ET DE PAIEMENT :
+   - Jalon 1 (30%) : Validation Cahier des Charges & Figma  -----> [Montant 1]
+   - Jalon 2 (40%) : Livraison Version Beta Fonctionnelle  -----> [Montant 2]
+   - Jalon 3 (30%) : Recette Finale, Déploiement & Solde   -----> [Montant 3]
+
+3. GARANTIES :
+   - 6 Mois de garantie corrective gratuite
+   - Transfert 100% de la Propriété Intellectuelle du Code Source
+-----------------------------------------------------------------</code></pre>
+    </div>
+
+    <!-- MODULE 9 -->
+    <div class="chapter">
+        <div class="module-header">
+            <div class="module-number">Module 9</div>
+            <div class="module-title">Les Secrets d'Infiltré pour Percer & Exceller dans le Développement Software</div>
+        </div>
+
+        <h2>9.1 Les 5 Secrets Technologiques de l'Ingénierie Logicielle Professionnelle</h2>
+        <p>Les développeurs d'élite ne sont pas plus intelligents : ils appliquent des principes d'ingénierie ignorés du grand public :</p>
+
+        <ul>
+            <li><strong>1. Le Secret des "Design Patterns" (Patrons de Conception) :</strong> Comprendre les architectures réutilisables (Singleton, Factory, Repository, MVC). Séparer hermétiquement la logique métier des requêtes de base de données.</li>
+            <li><strong>2. Le Secret du Clean Code & de la Refactorisation :</strong> Bannir les noms de variables vagues comme <code>x</code>, <code>temp</code> ou <code>data</code>. Écrire du code qui se lit comme une phrase en français/anglais.</li>
+            <li><strong>3. Le Secret du Debugging Pro :</strong> Ne plus mettre des <code>console.log</code> partout au hasard. Utiliser les <strong>Breakpoints dans VS Code</strong> et l'inspecteur <strong>Chrome DevTools (Network & Performance Tab)</strong> pour trouver l'origine exacte des bugs en 10 secondes.</li>
+            <li><strong>4. Le Secret de l'Automatisation par l'IA :</strong> Utiliser ChatGPT / Copilot / Claude non pas pour remplacer la réflexion, mais pour <strong>générer les tests unitaires</strong>, valider la syntaxe et accélérer le codage par 5.</li>
+            <li><strong>5. Le Secret de la Gestion des Secrets (.env) :</strong> Ne JAMAIS pousser de mots de passe, tokens ou clés API sur GitHub. Toujours ajouter <code>.env</code> dans <code>.gitignore</code> dès la création du projet.</li>
+        </ul>
+
+        <h2>9.2 Le Secret pour Obtenir des Clients & un Emploi sans Expérience préalable</h2>
+        <p>Sans diplôme prestigieux ni années d'expérience officielle, la preuve par le code est l'arme absolue pour s'imposer :</p>
+
+        <div class="callout callout-success">
+            <div class="callout-title">La Stratégie du Portfolio d'Élite :</div>
+            <ul>
+                <li><strong>Arrêter les Projets Scolaires Génériques :</strong> Ne montrez JAMAIS une calculatrice ou une Todo List sur votre profil !</li>
+                <li><strong>Construire 3 Projets "Monstres" Complets :</strong>
+                    <ol>
+                        <li>Un SaaS Web complet (Ex: Application de gestion avec abonnement et paiements Stripe).</li>
+                        <li>Une Application Mobile multi-plateforme avec notifications push et géolocalisation.</li>
+                        <li>Un Tableau de Bord analytique en temps réel interfacé avec des WebSockets.</li>
+                    </ol>
+                </li>
+                <li><strong>La Règle du README Impeccable :</strong> Chaque dépôt GitHub doit posséder un titre clair, une vidéo GIF de démonstration, la liste des technologies et la commande pour lancer le projet en 1 clic.</li>
+            </ul>
+        </div>
+
+        <h2>9.3 Réussir les Entretiens Techniques & Négociation du Tarif (TJM)</h2>
+        <p>En entretien technique, les recruteurs cherchent à tester votre méthodologie de résolution de problèmes :</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Étape de l'Entretien</th>
+                    <th>Ce que le Recruteur Évalue</th>
+                    <th>La Stratégie d'Excellence</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>1. Culture & Architecture</strong></td>
+                    <td>Compréhension du Web, des APIs REST, du CORS et du cycle de vie des composants.</td>
+                    <td>Parler avec un vocabulaire précis : <em>Asynchronisme, Immutabilité, Middleware, Injection de dépendances</em>.</td>
+                </tr>
+                <tr>
+                    <td><strong>2. Coding Live / Algo</strong></td>
+                    <td>Capacité à analyser un problème sous pression et à réfléchir à voix haute.</td>
+                    <td>Toujours expliciter sa réflexion avant d'écrire la moindre ligne de code. Proposer d'abord une solution simple, puis l'optimiser.</td>
+                </tr>
+                <tr>
+                    <td><strong>3. Négociation Tarifaire (TJM)</strong></td>
+                    <td>Posture professionnelle et valeur perçue.</td>
+                    <td>Ne jamais donner un chiffre au hasard. Ne jamais négocier à la baisse sans ajuster le périmètre de travail.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- MODULE 10 -->
+    <div class="chapter">
+        <div class="module-header">
+            <div class="module-number">Module 10</div>
+            <div class="module-title">Psychologie de Vente & Conviction Express : Gagner la Confiance du Client en 5 Min</div>
+        </div>
+
+        <h2>10.1 La Règle des 3 Premières Minutes (Écoute Active & Inversion de Posture)</h2>
+        <p>Les 180 premières secondes d'une interaction commerciale déterminent si le client vous percevra comme un <strong>Exécutant interchangeable</strong> ou comme un <strong>Expert Incontournable</strong> :</p>
+
+        <div class="callout callout-warning">
+            <div class="callout-title">L'Erreur Fatale des Développeurs Débutants :</div>
+            Parler immédiatement de code, de frameworks (React, Node.js, Python), d'algorithmes ou d'outils techniques. Le client chef d'entreprise ne cherche pas à acheter du code : <strong>il cherche à résoudre un problème métier ou à augmenter son chiffre d'affaires</strong>.
+        </div>
+
+        <h3>Les 3 Piliers de l'Inversion de Posture :</h3>
+        <ol>
+            <li><strong>1. La Règle du Miroir & Reformulation Métier :</strong> Laissez le client parler pendant les 2 premières minutes sans l'interrompre. Puis reformulez avec SES propres mots :
+                <br><em>« Si je résume bien votre situation, votre enjeu principal n'est pas simplement d'avoir une application mobile de plus, mais de réduire de 50% le temps de gestion de vos dossiers et d'éliminer les erreurs manuelles d'encaissement. Est-ce exactement cela ? »</em>
+            </li>
+            <li><strong>2. La Posture du Diagnosticien / Médecin IT :</strong> Posez des questions d'investigation stratégiques :
+                <ul>
+                    <li><em>« Pourquoi souhaitez-vous lancer ce projet maintenant plutôt que dans 6 mois ? »</em></li>
+                    <li><em>« Quel est l'impact financier quotidien pour votre organisation si ce système n'est pas en ligne d'ici la fin du trimestre ? »</em></li>
+                </ul>
+            </li>
+            <li><strong>3. La Preuve Visuelle "Show, Don't Tell" en 30 secondes :</strong> Ne perdez pas de temps en longs discours. Sortez votre smartphone ou votre PC et montrez une vidéo GIF ou une démonstration live d'une interface fluide déjà développée. L'impact visuel déclenche l'accord émotionnel du client en un clin d'œil.</li>
+        </ol>
+
+        <h2>10.2 Le Script Secret en 4 Étapes pour Supprimer Tout Doute Client</h2>
+        <p>Pour éliminer définitivement la peur du risque chez le client et déclencher sa signature immédiate, déroulez ce script psychologique en 4 phrases :</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Étape Psychologique</th>
+                    <th>Script Mot-pour-Mot à Prononcer sur un Ton Calme et Assuré</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Étape 1 : Valider le Diagnostic</strong></td>
+                    <td><em>« Votre projet est extrêmement clair. C'est un cas de figure classique que j'ai déjà eu l'occasion d'architecturer avec succès sur d'autres projets d'envergure. »</em></td>
+                </tr>
+                <tr>
+                    <td><strong>2. Feuille de Route Sans Jargon</strong></td>
+                    <td><em>« Pour sécuriser votre temps et votre budget, nous allons procéder en 3 étapes simples : validation des maquettes Figma ➔ prototype fonctionnel testable sur votre téléphone dans 14 jours ➔ déploiement final. »</em></td>
+                </tr>
+                <tr>
+                    <td><strong>3. Suppression du Risque Financier</strong></td>
+                    <td><em>« Vous n'avez aucun risque à prendre : la prestation est découpée par jalons. Vous ne débloquez le deuxième virement que lorsque vous avez vous-même testé et validé la version Beta intermédiaire. »</em></td>
+                </tr>
+                <tr>
+                    <td><strong>4. Garantie d'Excellence</strong></td>
+                    <td><em>« De plus, une fois le projet en ligne, vous bénéficiez d'une garantie corrective gratuite de 6 mois pour corriger le moindre imprévu à mes frais. »</em></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>10.3 Les 5 Signaux Comportementaux qui Déclenchent la Confiance Immédiate</h2>
+        <ul>
+            <li><strong>1. La Franchise Brutale ("Radical Candor") :</strong> Si le client propose une idée absurde ou trop coûteuse, dites-lui avec respect : <em>« En toute honnêteté, je vous déconseille de dépenser votre argent là-dessus pour la Version 1. Concentrons-nous sur ce qui va vous rapporter des clients immédiatement. »</em> ➔ Cette honnêteté détruit 100% de la méfiance !</li>
+            <li><strong>2. Des Supports Contractuels Irréprochables :</strong> Présenter des documents TDR et un devis sous forme de PDF épuré au design exécutif (comme le présent manuel PDF).</li>
+            <li><strong>3. La Réactivité Exemplaire :</strong> Répondre aux messages avec une réponse structurée en puces dans un délai maîtrisé.</li>
+            <li><strong>4. L'Assurance Vocale & le Regard Direct :</strong> Parler posément, sans débit précipité, en articulant chaque choix d'architecture avec sérénité.</li>
+            <li><strong>5. Le Respect de la Parole Donnée :</strong> Respecter chaque mini-engagement (Ex : <em>"Je vous envoie le récapitulatif par mail ce soir à 18h"</em> -> L'envoyer à 17h55).</li>
+        </ul>
+    </div>
+
+    <!-- MODULE 11 -->
+    <div class="chapter">
+        <div class="module-header">
+            <div class="module-number">Module 11</div>
+            <div class="module-title">Le Lexique & Glossaire Exhaustif du Développeur Full-Stack (Plus de 60 Termes)</div>
+        </div>
+
+        <h2>11.1 Dictionnaire Web, Frontend, UI/UX & React</h2>
+        <ul>
+            <li><strong>API (Application Programming Interface) :</strong> Interface logicielle permettant à deux systèmes (comme le Frontend Web/Mobile et le serveur Backend) de communiquer de manière sécurisée.</li>
+            <li><strong>SPA (Single Page Application) :</strong> Application web dynamique (React/Vite) qui charge une seule page HTML et met à jour l'écran sans recharger la page complète.</li>
+            <li><strong>PWA (Progressive Web App) :</strong> Site web optimisé fonctionnant comme une application mobile native (installable sur l'écran d'accueil et disponible hors-ligne).</li>
+            <li><strong>Virtual DOM :</strong> Copie en mémoire du DOM HTML maintenue par React pour recalculer uniquement les éléments modifiés à l'écran (Algorithme de Diffing).</li>
+            <li><strong>Responsive Design :</strong> Conception d'interface adaptative s'ajustant automatiquement sur Smartphones, Tablettes et Ordinateurs.</li>
+            <li><strong>State & Props :</strong> L'état local modifiable d'un composant React (<code>useState</code>) vs les propriétés en lecture seule transmises par un composant parent.</li>
+            <li><strong>Custom Hook :</strong> Fonction personnalisée React (ex: <code>useAuth</code>) permettant d'encapsuler et de réutiliser de la logique métier dans toute l'application.</li>
+        </ul>
+
+        <h2>11.2 Dictionnaire Backend, Base de Données & Sécurité</h2>
+        <ul>
+            <li><strong>API REST / RESTful :</strong> Architecture d'API standardisée reposant sur les méthodes HTTP (<code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code>, <code>PATCH</code>).</li>
+            <li><strong>JWT (JSON Web Token) :</strong> Jeton cryptographique compact et autonome transmis dans les en-têtes HTTP pour authentifier un utilisateur sans état serveur (Stateless).</li>
+            <li><strong>CRUD :</strong> Acronyme représentant les 4 opérations de base sur les données : <strong>C</strong>reate (Créer), <strong>R</strong>ead (Lire), <strong>U</strong>pdate (Mettre à jour), <strong>D</strong>elete (Supprimer).</li>
+            <li><strong>ORM / ODM :</strong> Outils (Mongoose, Prisma) traduisant les requêtes de base de données en objets JavaScript manipulables sans écrire de code SQL brut.</li>
+            <li><strong>NoSQL vs SQL :</strong> Base de données orientée documents flexibles (MongoDB) vs Base de données relationnelle structurée sous forme de tables liées (PostgreSQL).</li>
+            <li><strong>Bcrypt :</strong> Fonction de hachage cryptographique sécurisée à sens unique avec grain de sel (Salt) utilisée pour protéger les mots de passe.</li>
+            <li><strong>CORS (Cross-Origin Resource Sharing) :</strong> Mécanisme de sécurité HTTP restreignant les requêtes provenant de domaines non autorisés vers l'API.</li>
+            <li><strong>Rate Limiting :</strong> Limitation automatique du nombre de requêtes autorisées par IP pour contrer les attaques de force brute et le déni de service (DDoS).</li>
+            <li><strong>RBAC (Role-Based Access Control) :</strong> Contrôle d'accès par rôles (ex : <code>ADMIN</code>, <code>FORMATEUR</code>, <code>ETUDIANT</code>).</li>
+        </ul>
+
+        <h2>11.3 Dictionnaire Mobile & DevOps Cloud</h2>
+        <ul>
+            <li><strong>React Native & Expo CLI :</strong> Framework et boîte à outils permettant d'écrire des applications mobiles Android et iOS natives en JavaScript.</li>
+            <li><strong>Bridge Natif :</strong> Passerelle logicielle faisant communiquer le fil d'exécution JavaScript avec les APIs natives iOS/Android.</li>
+            <li><strong>SecureStore / Keychain :</strong> Espace de stockage hautement chiffré du système d'exploitation mobile réservé aux jetons JWT et données sensibles.</li>
+            <li><strong>EAS (Expo Application Services) :</strong> Infrastructure Cloud compilant automatiquement vos fichiers exécutables Android (<code>.apk</code>/<code>.aab</code>) et iOS (<code>.ipa</code>).</li>
+            <li><strong>Docker & Conteneur :</strong> Technologie d'empaquetage garantissant qu'une application s'exécute de manière identique sur n'importe quel serveur.</li>
+            <li><strong>CI/CD (Continuous Integration / Continuous Deployment) :</strong> Pipeline automatisé (GitHub Actions) testant et déployant le code en ligne à chaque commit.</li>
+        </ul>
+
+        <h2>11.4 Dictionnaire Business, Gestion de Projet Agile & Freelance</h2>
+        <ul>
+            <li><strong>MVP (Minimum Viable Product) :</strong> Version initiale simplifiée d'un produit contenant uniquement les fonctionnalités indispensables pour tester le marché.</li>
+            <li><strong>Méthode Agile / Scrum :</strong> Méthodologie de développement itérative organisée en cycles de 2 semaines (Sprints) privilégiant l'adaptation continue.</li>
+            <li><strong>CdC & TDR :</strong> Cahier des Charges (spécifications techniques) & Termes de Référence (cadre financier et juridique du contrat).</li>
+            <li><strong>TJM (Taux Journalier Moyen) :</strong> Prix facturé par un développeur indépendant pour une journée de travail (ex: 200 000 FCFA / jour).</li>
+            <li><strong>SLA (Service Level Agreement) :</strong> Contrat de niveau de service garantissant le taux de disponibilité d'une application (ex: 99.9%).</li>
+        </ul>
+    </div>
+
+    <!-- MODULE 12 -->
+    <div class="chapter">
+        <div class="module-header">
+            <div class="module-number">Module 12</div>
+            <div class="module-title">Intégration des API de Paiement (Mobile Money & Stripe)</div>
+        </div>
+
+        <h2>12.1 Flux de Paiement Mobile Money (Orange Money, MTN, Wave) & Webhooks</h2>
+        <p>En Afrique et dans les marchés émergents, 80% des transactions numériques s'effectuent par Mobile Money via des passerelles comme <strong>CinetPay</strong>, <strong>PaySika</strong> ou <strong>Bizao</strong> :</p>
+
+        <pre><code><span class="code-kw">import</span> axios <span class="code-kw">from</span> <span class="code-str">'axios'</span>;
+
+<span class="code-cmt">// Initialiser une transaction Mobile Money (Orange Money / MTN)</span>
+<span class="code-kw">export async function</span> <span class="code-fn">initierPaiementMobile</span>(montant: <span class="code-kw">number</span>, telephone: <span class="code-kw">string</span>) {
+    <span class="code-kw">const</span> payload = {
+        apikey: process.env.<span class="code-str">CINETPAY_API_KEY</span>,
+        site_id: process.env.<span class="code-str">CINETPAY_SITE_ID</span>,
+        transaction_id: <span class="code-str">`TX_${Date.now()}`</span>,
+        amount: montant,
+        currency: <span class="code-str">'XAF'</span>,
+        description: <span class="code-str">'Paiement de la Formation Web & Mobile'</span>,
+        notify_url: <span class="code-str">'https://api.votre-domaine.com/webhook/cinetpay'</span>,
+        customer_phone_number: telephone
+    };
+
+    <span class="code-kw">const</span> response = <span class="code-kw">await</span> axios.<span class="code-fn">post</span>(<span class="code-str">'https://api-checkout.cinetpay.com/v2/payment'</span>, payload);
+    <span class="code-kw">return</span> response.data;
+}</code></pre>
+
+        <h2>12.2 Traitement des Webhooks de Confirmation de Paiement</h2>
+        <p>Ne confirmez JAMAIS une commande côté client ! Le serveur marchand doit attendre la notification <strong>Webhook</strong> envoyée directement de serveur à serveur :</p>
+
+        <pre><code><span class="code-kw">import</span> { Request, Response } <span class="code-kw">from</span> <span class="code-str">'express'</span>;
+
+<span class="code-kw">export async function</span> <span class="code-fn">traiterWebhookPaiement</span>(req: Request, res: Response) {
+    <span class="code-kw">const</span> { transaction_id, status } = req.body;
+
+    <span class="code-kw">if</span> (status === <span class="code-str">'ACCEPTED'</span>) {
+        <span class="code-cmt">// 1. Valider la commande en Base de Données</span>
+        <span class="code-kw">await</span> Commande.<span class="code-fn">updateOne</span>({ transactionId: transaction_id }, { status: <span class="code-str">'PAYEE'</span> });
+        
+        <span class="code-cmt">// 2. Envoyer le reçu par e-mail ou débloquer l'accès</span>
+        console.<span class="code-fn">log</span>(<span class="code-str">`Paiement réussi pour la transaction : ${transaction_id}`</span>);
+    }
+
+    <span class="code-kw">return</span> res.<span class="code-fn">status</span>(<span class="code-num">200</span>).<span class="code-fn">json</span>({ received: <span class="code-kw">true</span> });
+}</code></pre>
+    </div>
+
+    <!-- MODULE 13 -->
+    <div class="chapter">
+        <div class="module-header">
+            <div class="module-number">Module 13</div>
+            <div class="module-title">Maintenance, Monitoring & Plan de Reprise d'Activité (PRA)</div>
+        </div>
+
+        <h2>13.1 Gestion du Processus Backend avec PM2 & Monitoring Sentry</h2>
+        <p>En production, si votre serveur Node.js plante à cause d'une erreur inattendue, <strong>PM2</strong> le relance automatiquement en moins de 100 millisecondes :</p>
+
+        <pre><code># 1. Installation globale de PM2
+npm install -g pm2
+
+# 2. Démarrage de l'API en mode Cluster (Haute Disponibilité multi-coeurs CPU)
+pm2 start dist/app.js -i max --name "api-prod"
+
+# 3. Sauvegarde de la configuration pour redémarrage automatique après reboot serveur
+pm2 save
+pm2 startup</code></pre>
+
+        <h2>13.2 Script de Sauvegarde Automatique de la Base de Données (Backup Cron)</h2>
+        <p>Un développeur senior sauvegarde la base de données de ses clients chaque nuit à minuit via un script <strong>Cron Job</strong> :</p>
+
+        <pre><code>#!/bin/bash
+# Script de Backup PostgreSQL Automatique
+DATE=$(date +%Y-%m-%d_%H-%M-%S)
+BACKUP_DIR="/var/backups/postgres"
+mkdir -p $BACKUP_DIR
+
+# Exécution du dump compressé
+pg_dump -U postgres -d nom_base_de_donnees | gzip > $BACKUP_DIR/db_backup_$DATE.sql.gz
+
+# Suppression des sauvegardes de plus de 30 jours
+find $BACKUP_DIR -type f -name "*.sql.gz" -mtime +30 -delete
+
+echo "Sauvegarde réussie le $DATE"</code></pre>
+    </div>
+
+    <!-- MODULE 14 -->
+    <div class="chapter">
+        <div class="module-header">
+            <div class="module-number">Module 14</div>
+            <div class="module-title">Modèles de Contrats Juridiques & Accords de Confidentialité (NDA)</div>
+        </div>
+
+        <h2>14.1 Modèle de Contrat de Prestation de Services Informatiques Prêt à Signer</h2>
+        <pre><code>CONTRAT DE PRESTATION DE SERVICES INFORMATIQUES
+-----------------------------------------------------------------
+ENTRE LES SOUSSIGNÉS :
+1. Le Prestataire : Tchibkere Salomon, Développeur Full-Stack & Consultant.
+2. Le Client : [Nom de la Société / Client].
+
+ARTICLE 1 : OBJET DU CONTRAT
+Le Prestataire s'engage à réaliser la conception, le développement Web/Mobile 
+et le déploiement de la solution logicielle décrite dans le Cahier des Charges.
+
+ARTICLE 2 : PROPRIÉTÉ INTELLECTUELLE
+La totalité des droits d'auteur et du code source est transférée au Client 
+dès le paiement intégral du solde final prévu aux Termes de Référence (TDR).
+
+ARTICLE 3 : GARANTIE CORRECTIVE
+Le Prestataire offre une garantie corrective gratuite d'une durée de 6 (six) mois 
+à compter de la date de recette finale.
+
+Fait à Yaoundé, le [Date]
+Le Prestataire (Signature)                 Le Client (Signature)
+-----------------------------------------------------------------</code></pre>
+
+        <h2>14.2 Accord de Non-Divulgation & Confidentialité (NDA - Non-Disclosure Agreement)</h2>
+        <pre><code>ACCORD DE CONFIDENTIALITÉ (NDA)
+-----------------------------------------------------------------
+Le Prestataire s'engage à conserver la confidentialité la plus stricte concernant 
+toutes les informations stratégiques, les bases de données, les algorithmes 
+et les secrets commerciaux transmis par le Client dans le cadre du projet.
+
+Cet engagement reste valable pour une durée de 3 (trois) ans après la fin du contrat.
+-----------------------------------------------------------------</code></pre>
+    </div>
+
+</body>
+</html>
