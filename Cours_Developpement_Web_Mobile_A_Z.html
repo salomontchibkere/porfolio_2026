@@ -577,6 +577,15 @@
                     <div class="toc-subitem"><span>14.2 Accord de Non-Divulgation / Confidentialité (NDA) Prêt à Signer</span> <span>Page 55</span></div>
                 </div>
             </div>
+
+            <div class="toc-module">
+                <div class="toc-module-title">Module 15 : Guide Pratique & Prompts d'IA pour Multiplier sa Vitesse par 10 (ChatGPT, Claude 3.5, Cursor)</div>
+                <div class="toc-sublist">
+                    <div class="toc-subitem"><span>15.1 Sélection des Meilleurs Outils d'IA par Cas d'Usage (Code, Design, Docs)</span> <span>Page 56</span></div>
+                    <div class="toc-subitem"><span>15.2 Prompts Prêts à l'Emploi pour les 6 Activités Clés du Développeur</span> <span>Page 57</span></div>
+                    <div class="toc-subitem"><span>15.3 Les 4 Règles d'Or du Prompt Engineering pour Développeur & Consultant</span> <span>Page 59</span></div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1445,6 +1454,82 @@ et les secrets commerciaux transmis par le Client dans le cadre du projet.
 
 Cet engagement reste valable pour une durée de 3 (trois) ans après la fin du contrat.
 -----------------------------------------------------------------</code></pre>
+    </div>
+
+    <!-- MODULE 15 -->
+    <div class="chapter">
+        <div class="module-header">
+            <div class="module-number">Module 15</div>
+            <div class="module-title">Guide Pratique & Prompts d'IA pour Multiplier sa Vitesse par 10 (ChatGPT, Claude 3.5, Cursor)</div>
+        </div>
+
+        <h2>15.1 Sélection des Meilleurs Outils d'IA par Cas d'Usage Métier</h2>
+        <p>L'Intelligence Artificielle n'a pas pour but de remplacer le développeur, mais d'automatiser 80% des tâches répétitives pour vous permettre de vous concentrer sur la valeur stratégique et l'architecture.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Activité / Cas d'Usage Métier</th>
+                    <th>Outil d'IA Recommandé</th>
+                    <th>Bénéfice Concret & Gain de Temps</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Rédaction de CdC & TDR Client</strong></td>
+                    <td>Claude 3.5 Sonnet / ChatGPT-4o</td>
+                    <td>Génère des cahiers des charges structurés en français institutionnel en 3 minutes (Gain : 5 heures).</td>
+                </tr>
+                <tr>
+                    <td><strong>Génération de Code & Refactoring</strong></td>
+                    <td>Cursor AI / GitHub Copilot</td>
+                    <td>Autocomplétion intelligente et création de composants complexes dans l'IDE (Gain : 70% du temps de frappe).</td>
+                </tr>
+                <tr>
+                    <td><strong>Debugging & Résolution de Bugs</strong></td>
+                    <td>ChatGPT-4o / Claude 3.5</td>
+                    <td>Analyse instantanée des logs d'erreurs et explication de la cause racine (Gain : Résolution en 2 min).</td>
+                </tr>
+                <tr>
+                    <td><strong>Génération de Maquettes UX/UI</strong></td>
+                    <td>v0.dev (Vercel) / Midjourney</td>
+                    <td>Création de composants React + Tailwind ready-to-use à partir d'un prompt texte (Gain : 1 journée design).</td>
+                </tr>
+                <tr>
+                    <td><strong>Rédaction de Tests Unitaires</strong></td>
+                    <td>GitHub Copilot / Jest AI</td>
+                    <td>Écrit la totalité des suites de tests Jest / Cypress avec couverture de cas limites (Gain : 3 heures).</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>15.2 Prompts Prêts à l'Emploi pour les 6 Activités Clés du Développeur</h2>
+
+        <h3>1. Prompt pour Générer un Cahier des Charges Fonctionnel</h3>
+        <pre><code>"Agis comme un Chef de Projet IT & Architecte Logiciel Senior. Rédige le Cahier des Charges Fonctionnel et Technique complet pour [Nom/Description du Projet]. Inclus : 1. La liste des rôles d'utilisateurs (RBAC), 2. La matrice des 5 User Stories majeures, 3. Les spécifications des endpoints d'API REST et du schéma de base de données, 4. Les exigences de sécurité OWASP. Adopte un ton professionnel et structuré avec des tableaux."</code></pre>
+
+        <h3>2. Prompt pour Concevoir le Schéma de Base de Données (Mongoose / SQL)</h3>
+        <pre><code>"Agis comme un Administrateur de Base de Données (DBA) Senior. Conçois le schéma Mongoose TypeScript complet pour [Système, ex: E-Commerce Mobile Money avec Utilisateurs, Produits et Commandes]. Inclus les validations de types, les clés étrangères (ref), les index d'optimisation et les méthodes virtuelles."</code></pre>
+
+        <h3>3. Prompt pour Créer un Composant Frontend React / React Native</h3>
+        <pre><code>"Agis comme un Développeur Frontend Senior. Génère un composant TypeScript réutilisable et responsive pour [Décrire l'écran, ex: Tableau de bord avec cartes de statistiques et graphiques]. Utilise TailwindCSS, des typages stricts TypeScript, et gère les états d'attente (Loading) et d'erreur."</code></pre>
+
+        <h3>4. Prompt pour Debugger et Corriger un Bug Inexpliqué</h3>
+        <pre><code>"Voici une erreur survenue dans mon API Node.js/Express : [Coller la trace d'erreur du terminal]. Voici le code du fichier concerné : [Coller le code]. Identifie la cause racine exacte du problème, explique pourquoi l'erreur survient et fournis le code corrigé."</code></pre>
+
+        <h3>5. Prompt pour Générer une Suite de Tests Unitaires Complet</h3>
+        <pre><code>"Agis comme un Ingénieur QA (Quality Assurance). Rédige la suite de tests unitaires complète avec Jest pour le contrôleur suivant : [Coller le code du contrôleur]. Couvre le cas nominal (200 OK), les cas d'erreur de validation (400), non autorisé (401) et serveur (500)."</code></pre>
+
+        <h3>6. Prompt pour Rédiger une Proposition Commerciale et Gagner un Client</h3>
+        <pre><code>"Agis comme un Consultant Commercial IT Senior. Rédige une proposition technique et financière percutante pour un client entreprise qui souhaite [Décrire le besoin du client]. Mets en avant la méthodologie par jalons de 2 semaines, la garantie corrective offerte de 6 mois, et adopte une posture rassurante qui supprime tout risque financier pour le client."</code></pre>
+
+        <h2>15.3 Les 4 Règles d'Or du Prompt Engineering pour Ingénieur Logiciel</h2>
+        <ul>
+            <li><strong>1. Définir le Rôle (Role-Setting) :</strong> Toujours commencer le prompt en assignant une expertise spécifique (ex: <em>"Agis comme un Architecte Cloud AWS Senior..."</em>).</li>
+            <li><strong>2. Fournir le Contexte (Context Injection) :</strong> Donner les éléments d'environnement (version de Node.js, packages installés, types TypeScript) pour éviter les réponses hors-sujet.</li>
+            <li><strong>3. Imposer le Format de Sortie (Output Formatting) :</strong> Exiger des contraintes précises (ex: <em>"Donne uniquement le code TypeScript valide, sans texte explicatif supplémentaire"</em>).</li>
+            <li><strong>4. La Réflexion par Étapes (Chain of Thought) :</strong> Pour les problèmes complexes, demander à l'IA d'expliquer d'abord son raisonnement architectural avant de soumettre la solution de code.</li>
+        </ul>
     </div>
 
 </body>
