@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Guide Complet - Visibilité Portfolio, Google Search Console & Google Analytics</title>
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 16mm 14mm 16mm 14mm;
+            @bottom-right {
+                content: counter(page);
+            }
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #1a1a24;
+            background: #ffffff;
+            line-height: 1.5;
+            font-size: 13px;
+        }
+        .header {
+            border-bottom: 2px solid #2563eb;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        .header-title h1 {
+            font-size: 22px;
+            color: #0f172a;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        .header-title p {
+            font-size: 13px;
+            color: #2563eb;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+        .header-badge {
+            text-align: right;
+            font-size: 11px;
+            color: #64748b;
+        }
+        .badge-author {
+            font-weight: 700;
+            color: #0f172a;
+            font-size: 12px;
+        }
+
+        .summary-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px 14px;
+            margin-bottom: 16px;
+        }
+        .summary-card h3 {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #334155;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 16px;
+            font-size: 12px;
+        }
+        .summary-item strong {
+            color: #475569;
+        }
+        .summary-item span, .summary-item code {
+            color: #0f172a;
+            font-weight: 600;
+            word-break: break-all;
+        }
+        code {
+            background: #f1f5f9;
+            padding: 1px 4px;
+            border-radius: 4px;
+            font-family: Consolas, Monaco, "Courier New", monospace;
+            font-size: 11px;
+            color: #1e293b;
+        }
+
+        h2 {
+            font-size: 15px;
+            color: #0f172a;
+            border-left: 4px solid #2563eb;
+            padding-left: 8px;
+            margin: 18px 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        h2.green { border-color: #10b981; }
+        h2.purple { border-color: #8b5cf6; }
+        h2.amber { border-color: #f59e0b; }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+            page-break-inside: avoid;
+        }
+        .card-header {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 6px;
+        }
+
+        .step-list {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+        .step-list li {
+            position: relative;
+            padding-left: 26px;
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+        .step-list li::before {
+            content: counter(step-counter);
+            counter-increment: step-counter;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 18px;
+            height: 18px;
+            background: #2563eb;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 10px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .step-list.green li::before { background: #10b981; }
+        .step-list.purple li::before { background: #8b5cf6; }
+
+        .callout {
+            background: #eff6ff;
+            border-left: 3px solid #3b82f6;
+            padding: 8px 12px;
+            border-radius: 0 6px 6px 0;
+            font-size: 12px;
+            margin: 8px 0;
+            color: #1e40af;
+        }
+        .callout-success {
+            background: #f0fdf4;
+            border-left-color: #22c55e;
+            color: #166534;
+        }
+        .callout-tip {
+            background: #fefce8;
+            border-left-color: #eab308;
+            color: #854d0e;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11.5px;
+            margin: 8px 0;
+        }
+        th, td {
+            border: 1px solid #cbd5e1;
+            padding: 6px 8px;
+            text-align: left;
+        }
+        th {
+            background: #f1f5f9;
+            color: #334155;
+            font-weight: 700;
+        }
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        .page-break {
+            page-break-before: always;
+        }
+
+        .footer-note {
+            margin-top: 16px;
+            padding-top: 8px;
+            border-top: 1px solid #e2e8f0;
+            font-size: 10.5px;
+            color: #94a3b8;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-title">
+            <h1>GUIDE OFFICIEL DE VISIBILITÉ WEB</h1>
+            <p>Google Search Console · Google Analytics 4 · Stratégie de Trafic</p>
+        </div>
+        <div class="header-badge">
+            <div class="badge-author">Tchibkere Salomon</div>
+            <div>Développeur Full-Stack · Yaoundé</div>
+            <div>Octobre 2026</div>
+        </div>
+    </div>
+
+    <!-- Fiche Récapitulative -->
+    <div class="summary-card">
+        <h3>📋 Vos Identifiants & Liens Officiels</h3>
+        <div class="summary-grid">
+            <div class="summary-item">
+                <strong>Site en ligne :</strong><br>
+                <span>https://salomontchibkere.github.io/porfolio_2026/</span>
+            </div>
+            <div class="summary-item">
+                <strong>ID Google Analytics 4 :</strong><br>
+                <code>G-HP14C9SMF4</code>
+            </div>
+            <div class="summary-item">
+                <strong>Sitemap XML :</strong><br>
+                <span>https://salomontchibkere.github.io/porfolio_2026/sitemap.xml</span>
+            </div>
+            <div class="summary-item">
+                <strong>Validation Search Console :</strong><br>
+                <code>Cnlx7DVeTuDzXAmhNbiOFQQTH1cVOIDNTnjF-xHpees</code>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 1 : Google Analytics 4 -->
+    <h2 class="green">1. Google Analytics 4 : Suivre vos visiteurs au quotidien</h2>
+
+    <div class="card">
+        <div class="card-header">📲 Comment l'installer sur votre téléphone (Recommandé)</div>
+        <ol class="step-list green">
+            <li>Ouvrez le <strong>Google Play Store</strong> (Android) ou l'<strong>App Store</strong> (iPhone).</li>
+            <li>Recherchez et installez l'application officielle : <strong>Google Analytics</strong> (par Google LLC).</li>
+            <li>Connectez-vous avec votre compte Gmail : <code>salomontchibkere@gmail.com</code>.</li>
+            <li>Sélectionnez la propriété <strong>« Portfolio Salomon »</strong>.</li>
+        </ol>
+        <div class="callout callout-success">
+            <strong>Résultat immédiat :</strong> Vous recevrez des alertes quand des personnes visitent votre portfolio et vous pourrez observer les visites en direct depuis votre téléphone !
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">📊 Les 4 écrans indispensables à regarder</div>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 25%;">Section Analytics</th>
+                    <th style="width: 35%;">Où la trouver ?</th>
+                    <th style="width: 40%;">Pourquoi c'est important ?</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>En temps réel</strong></td>
+                    <td>Rapports 📊 > <em>Temps réel</em></td>
+                    <td>Voir les personnes connectées à la seconde même et leur pays sur la carte.</td>
+                </tr>
+                <tr>
+                    <td><strong>Acquisition de trafic</strong></td>
+                    <td>Rapports 📊 > <em>Acquisition</em> > <em>Trafic</em></td>
+                    <td>Savoir si vos visiteurs viennent de <strong>LinkedIn, WhatsApp, Google</strong> ou par lien direct.</td>
+                </tr>
+                <tr>
+                    <td><strong>Localisation géographique</strong></td>
+                    <td>Rapports 📊 > <em>Utilisateur</em> > <em>Données démographiques</em></td>
+                    <td>Découvrir les pays (Cameroun, France, etc.) et les villes qui s'intéressent à vous.</td>
+                </tr>
+                <tr>
+                    <td><strong>Appareils utilisés</strong></td>
+                    <td>Rapports 📊 > <em>Technologie</em> > <em>Détails techniques</em></td>
+                    <td>Vérifier si vos recruteurs sont sur smartphone ou ordinateur portable.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Saut de page propre pour la suite -->
+    <div class="page-break"></div>
+
+    <!-- Section 2 : Google Search Console -->
+    <h2>2. Google Search Console : Être premier sur Google</h2>
+
+    <div class="card">
+        <div class="card-header">🔍 Vos informations dans Google Search Console</div>
+        <p style="font-size: 12px; margin-bottom: 8px;">
+            Votre site a été validé et indexé avec succès par Google. Vous pouvez y accéder à tout moment sur ordinateur à l'adresse : <strong>https://search.google.com/search-console/</strong>
+        </p>
+        <div class="callout">
+            <strong>Astuce mobile :</strong> Sur le navigateur Chrome de votre téléphone, ouvrez le lien ci-dessus, appuyez sur les <strong>3 points (⋮)</strong> en haut à droite, puis sur <strong>« Ajouter à l'écran d'accueil »</strong> pour créer un raccourci direct.
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">📈 Ce qu'il faut surveiller chaque semaine</div>
+        <ul style="padding-left: 20px; font-size: 12px; margin-bottom: 6px;">
+            <li style="margin-bottom: 5px;"><strong>L'onglet Performances :</strong> vous indique le nombre total de <em>clics</em> et d'<em>impressions</em> (combien de fois votre nom ou portfolio est apparu sur Google).</li>
+            <li style="margin-bottom: 5px;"><strong>Les Requêtes :</strong> la liste des mots-clés exacts saisis par les internautes pour vous trouver (ex: <em>"Tchibkere Salomon", "Développeur Yaoundé"</em>).</li>
+            <li style="margin-bottom: 5px;"><strong>L'état des Sitemaps :</strong> votre sitemap <code>sitemap.xml</code> est envoyé et guide les robots de Google régulièrement.</li>
+        </ul>
+        <div class="callout callout-tip">
+            <strong>Que faire quand vous ajoutez un nouveau projet ?</strong><br>
+            Collez simplement l'URL de votre portfolio dans la barre supérieure de la Search Console et cliquez sur <strong>« DEMANDER UNE INDEXATION »</strong>. Google mettra à jour sa version sous 24h.
+        </div>
+    </div>
+
+    <!-- Section 3 : Stratégie de Visibilité Pro -->
+    <h2 class="purple">3. Plan d'Action pour Attirer Clients & Recruteurs</h2>
+
+    <div class="card">
+        <div class="card-header">🚀 Les 4 leviers prioritaires dès aujourd'hui</div>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 25%;">Canal</th>
+                    <th style="width: 45%;">Action concrète à réaliser</th>
+                    <th style="width: 30%;">Impact attendu</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>LinkedIn</strong></td>
+                    <td>Ajoutez le lien dans vos coordonnées et dans la section <em>Sélection (Featured)</em> de votre profil. Publiez un post avec une capture de votre portfolio.</td>
+                    <td>Visibilité auprès des recruteurs tech et entreprises camerounaises & internationales.</td>
+                </tr>
+                <tr>
+                    <td><strong>WhatsApp</strong></td>
+                    <td>Partagez le lien sur votre statut et dans les groupes d'étudiants / tech de Yaoundé I. Grâce à nos balises Open Graph, votre photo et votre titre apparaissent sous forme de carte professionnelle.</td>
+                    <td>Recommandations par vos pairs, étudiants et collègues formateurs.</td>
+                </tr>
+                <tr>
+                    <td><strong>CV Professionnel</strong></td>
+                    <td>Conservez le lien cliquable vers votre portfolio en haut de votre CV sous vos coordonnées.</td>
+                    <td>Augmentation drastique des chances d'entretien.</td>
+                </tr>
+                <tr>
+                    <td><strong>Profil GitHub</strong></td>
+                    <td>Dans les paramètres de votre profil GitHub (<code>salomontchibkere</code>), renseignez votre URL dans le champ <em>Website</em>.</td>
+                    <td>Crédibilité immédiate auprès des développeurs et recruteurs techniques.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Section 4 : Commandes de mise à jour -->
+    <h2 class="amber">4. Comment mettre à jour votre site à l'avenir</h2>
+    <div class="card">
+        <div class="card-header">💻 Les 3 commandes Git pour publier de nouveaux changements</div>
+        <p style="font-size: 12px; margin-bottom: 6px;">Dès que vous modifiez un texte, ajoutez un projet ou mettez à jour votre code dans ce dossier, ouvrez un terminal et tapez :</p>
+        <pre style="background: #0f172a; color: #f8fafc; padding: 10px; border-radius: 6px; font-family: Consolas, Monaco, monospace; font-size: 11.5px; overflow-x: auto;">
+git add .
+git commit -m "Mise a jour de mon portfolio"
+git push origin main
+        </pre>
+        <p style="font-size: 11.5px; color: #64748b; margin-top: 6px;">En 30 secondes, GitHub Pages publie automatiquement la nouvelle version sur Internet !</p>
+    </div>
+
+    <div class="footer-note">
+        Portfolio de Tchibkere Salomon · Développé avec excellence · Yaoundé I · Guide généré le 5 Octobre 2026
+    </div>
+
+</body>
+</html>
