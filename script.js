@@ -20,7 +20,7 @@ if (window.innerWidth > 850 && window.matchMedia('(pointer: fine)').matches) {
     });
     
     // Hover effect on links and buttons
-    const hoverElements = document.querySelectorAll('a, button, .btn, .project-card, .skill-card');
+    const hoverElements = document.querySelectorAll('a, button, .btn, .project-card, .skill-card, .service-card, .testimonial-card, .whatsapp-float');
     hoverElements.forEach(el => {
         el.addEventListener('mouseenter', () => {
             cursorFollower.style.width = '60px';
