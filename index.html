@@ -564,7 +564,72 @@
                 </div>
             </div>
         </div>
+
+        <div class="testimonials-cta">
+            <button type="button" class="btn btn-outline" id="openReviewModal">
+                <i class="fas fa-pen-to-square"></i>
+                <span>Laisser un avis ou témoignage</span>
+            </button>
+        </div>
     </section>
+
+    <!-- Modal Laisser un Avis -->
+    <div class="modal" id="reviewModal" aria-hidden="true">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title-box">
+                    <i class="fas fa-star" style="color: #F59E0B;"></i>
+                    <h3>Partagez votre avis</h3>
+                </div>
+                <button type="button" class="modal-close" id="closeReviewModal" aria-label="Fermer">&times;</button>
+            </div>
+            <form class="review-form" id="reviewForm" action="https://formsubmit.co/ajax/salomontchibkere@gmail.com" method="POST">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_subject" value="🌟 Nouvel avis reçu sur votre Portfolio Salomon !">
+                
+                <div class="form-group">
+                    <label for="reviewName">Votre nom & prénom *</label>
+                    <input type="text" id="reviewName" name="nom" placeholder="Ex: Jean Dupont" required>
+                    <div class="input-border"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="reviewRole">Votre fonction, entreprise ou formation *</label>
+                    <input type="text" id="reviewRole" name="role" placeholder="Ex: Gérant PME, Étudiant en formation..." required>
+                    <div class="input-border"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>Votre note *</label>
+                    <div class="star-rating" id="starRating">
+                        <i class="fas fa-star active" data-rating="1"></i>
+                        <i class="fas fa-star active" data-rating="2"></i>
+                        <i class="fas fa-star active" data-rating="3"></i>
+                        <i class="fas fa-star active" data-rating="4"></i>
+                        <i class="fas fa-star active" data-rating="5"></i>
+                    </div>
+                    <input type="hidden" id="reviewRating" name="note" value="5">
+                </div>
+
+                <div class="form-group">
+                    <label for="reviewMessage">Votre témoignage *</label>
+                    <textarea id="reviewMessage" name="avis" rows="4" placeholder="Que pensez-vous de la qualité du travail, de la réactivité et des compétences de Salomon ?" required></textarea>
+                    <div class="input-border"></div>
+                </div>
+
+                <div id="reviewFormStatus" class="form-status"></div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelReviewBtn">Annuler</button>
+                    <button type="submit" class="btn btn-primary" id="submitReviewBtn">
+                        <span>Publier mon avis</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- Contact Section -->
     <section id="contact" class="contact">
